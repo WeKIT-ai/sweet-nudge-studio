@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
-  Brain, Clock, ChevronRight, CheckCircle2, AlertTriangle, Shield, Flag,
+  Clock, ChevronRight, CheckCircle2, AlertTriangle, Shield, Flag,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import WeKitLogo from "@/components/WeKitLogo";
 
 interface Props {
   totalQ: number;
