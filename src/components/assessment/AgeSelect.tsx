@@ -25,8 +25,8 @@ export default function AssessmentAgeSelect({
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
         <Card className="border-border/50">
           <CardContent className="p-8 text-center">
-            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-              <Brain className="h-6 w-6 text-primary" />
+            <div className="mx-auto mb-4">
+              <WeKitLogo size="lg" className="mx-auto" />
             </div>
             <h2 className="font-display text-xl font-bold text-foreground">WeKIT™ Career Clarity 360</h2>
             <p className="mt-1 text-sm text-muted-foreground">

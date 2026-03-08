@@ -18,9 +18,7 @@ export default function AssessmentInstructions({ totalQ, onStart }: Props) {
         <Card className="border-border/50">
           <CardContent className="p-8">
             <div className="mb-6 flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-                <Brain className="h-6 w-6 text-primary" />
-              </div>
+              <WeKitLogo size="lg" />
               <div>
                 <h1 className="font-display text-2xl font-bold text-foreground">
                   WeKIT™ Career Clarity 360
