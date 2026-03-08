@@ -88,27 +88,27 @@ const Assessment = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Header */}
+      {/* Header — compact for mobile */}
       <header className="sticky top-0 z-50 border-b border-border/50 bg-background/95 backdrop-blur">
-        <div className="container mx-auto flex items-center justify-between px-6 py-3">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between px-4 py-2.5">
+          <div className="flex items-center gap-2">
             <WeKitLogo size="sm" />
-            <span className="font-display font-semibold text-foreground text-sm">
-              WeKIT™ Career Clarity 360
+            <span className="font-display font-semibold text-foreground text-xs sm:text-sm hidden sm:inline">
+              Career Clarity 360
             </span>
           </div>
-          <div className="flex items-center gap-3">
-            <Badge variant={timeLeft < 120 ? "destructive" : "secondary"} className="gap-1 font-mono text-xs">
+          <div className="flex items-center gap-2">
+            <Badge variant={timeLeft < 120 ? "destructive" : "secondary"} className="gap-1 font-mono text-[10px] sm:text-xs px-2 py-0.5">
               <Clock className="h-3 w-3" /> {formatTime(timeLeft)}
             </Badge>
-            <Badge variant="outline" className="text-xs">{answeredCount}/{totalQ}</Badge>
+            <Badge variant="outline" className="text-[10px] sm:text-xs px-2 py-0.5">{answeredCount}/{totalQ}</Badge>
           </div>
         </div>
         <Progress value={progressPct} className="h-1 rounded-none" />
       </header>
 
-      {/* Swipe area */}
-      <main className="flex-1 flex flex-col items-center justify-center px-6 py-12">
+      {/* Swipe area — fills viewport */}
+      <main className="flex-1 flex flex-col items-center justify-center px-4 py-6 sm:py-12">
         <AnimatePresence mode="wait">
           <motion.div
             key={question.id}
@@ -128,36 +128,38 @@ const Assessment = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Controls */}
-        <div className="mt-12 flex items-center gap-4">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleUndo}
-            disabled={history.length === 0}
-            className="gap-1"
-          >
-            <Undo2 className="h-3.5 w-3.5" /> Undo
-          </Button>
-          <div className="flex gap-1">
+        {/* Controls — mobile-friendly large touch targets */}
+        <div className="mt-6 sm:mt-12 w-full max-w-sm space-y-3">
+          <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
             {LIKERT_OPTIONS.map((opt, i) => (
               <button
                 key={i}
                 onClick={() => handleSwipeAnswer(i)}
-                className={`rounded-md px-2.5 py-1.5 text-[11px] font-medium border transition-all
+                className={`rounded-lg px-1 py-3 sm:py-2 text-[10px] sm:text-[11px] font-medium border transition-all min-h-[48px] active:scale-95
                   ${answers[question.id] === i
                     ? "border-primary bg-primary/10 text-primary"
                     : "border-border text-muted-foreground hover:border-primary/30 hover:text-foreground"
                   }`}
               >
-                {opt}
+                {opt.replace("Strongly ", "Str. ")}
               </button>
             ))}
           </div>
+          <div className="flex justify-center">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleUndo}
+              disabled={history.length === 0}
+              className="gap-1 min-h-[44px] px-6"
+            >
+              <Undo2 className="h-3.5 w-3.5" /> Undo
+            </Button>
+          </div>
         </div>
 
-        <p className="mt-4 text-xs text-muted-foreground text-center max-w-xs">
-          Swipe the card: ← Disagree · → Agree · ↑ Strongly Agree · ↓ Strongly Disagree · Tap for Neutral
+        <p className="mt-3 text-[10px] sm:text-xs text-muted-foreground text-center max-w-xs">
+          Swipe: ← Disagree · → Agree · ↑ Strongly Agree · ↓ Strongly Disagree · Tap for Neutral
         </p>
       </main>
     </div>
