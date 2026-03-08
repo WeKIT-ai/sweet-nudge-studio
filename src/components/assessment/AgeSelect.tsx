@@ -1,16 +1,10 @@
 import { useState } from "react";
-import { AgeGroup, weekitQuestions, LIKERT_OPTIONS } from "@/data/weekitQuestions";
+import { AgeGroup } from "@/data/weekitQuestions";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Brain, Clock, ChevronLeft, ChevronRight, Flag,
-  CheckCircle2, AlertTriangle, Shield,
-} from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+import WeKitLogo from "@/components/WeKitLogo";
 
 type AgeOption = { value: AgeGroup; label: string; desc: string };
 const AGE_OPTIONS: AgeOption[] = [
