@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  Brain,
   ArrowRight,
   CheckCircle2,
   Star,
@@ -17,7 +16,9 @@ import {
   Target,
   Heart,
   Compass,
+  Brain,
 } from "lucide-react";
+import WeKitLogo from "@/components/WeKitLogo";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
