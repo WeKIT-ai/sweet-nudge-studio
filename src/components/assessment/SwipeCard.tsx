@@ -65,19 +65,19 @@ export default function SwipeCard({
   };
 
   return (
-    <div className="relative flex flex-col items-center">
-      {/* Direction hints */}
-      <div className="absolute -top-10 left-1/2 -translate-x-1/2 flex items-center gap-1 text-xs text-muted-foreground">
-        <ChevronsUp className="h-3.5 w-3.5" /> Strongly Agree
+    <div className="relative flex flex-col items-center w-full max-w-[340px] sm:max-w-sm">
+      {/* Direction hints — hidden on very small screens */}
+      <div className="absolute -top-8 left-1/2 -translate-x-1/2 items-center gap-1 text-[10px] text-muted-foreground/60 hidden sm:flex">
+        <ChevronsUp className="h-3 w-3" /> Strongly Agree
       </div>
-      <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-1 text-xs text-muted-foreground">
-        <ChevronsDown className="h-3.5 w-3.5" /> Strongly Disagree
+      <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 items-center gap-1 text-[10px] text-muted-foreground/60 hidden sm:flex">
+        <ChevronsDown className="h-3 w-3" /> Strongly Disagree
       </div>
-      <div className="absolute top-1/2 -left-24 -translate-y-1/2 flex items-center gap-1 text-xs text-muted-foreground">
-        <ThumbsDown className="h-3.5 w-3.5" /> Disagree
+      <div className="absolute top-1/2 -left-20 -translate-y-1/2 items-center gap-1 text-[10px] text-muted-foreground/60 hidden md:flex">
+        <ThumbsDown className="h-3 w-3" /> Disagree
       </div>
-      <div className="absolute top-1/2 -right-20 -translate-y-1/2 flex items-center gap-1 text-xs text-muted-foreground">
-        <ThumbsUp className="h-3.5 w-3.5" /> Agree
+      <div className="absolute top-1/2 -right-16 -translate-y-1/2 items-center gap-1 text-[10px] text-muted-foreground/60 hidden md:flex">
+        <ThumbsUp className="h-3 w-3" /> Agree
       </div>
 
       <motion.div
@@ -89,7 +89,7 @@ export default function SwipeCard({
         style={{ x, y, rotate }}
         animate={exiting ? { opacity: 0, scale: 0.8 } : { opacity: 1, scale: 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 25 }}
-        className="w-full max-w-sm cursor-grab active:cursor-grabbing touch-none select-none"
+        className="w-full cursor-grab active:cursor-grabbing touch-none select-none"
       >
         <Card className="relative overflow-hidden border-border/50 shadow-xl">
           {/* Directional overlays */}
@@ -97,7 +97,7 @@ export default function SwipeCard({
             className="absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-destructive/20"
             style={{ opacity: leftOpacity }}
           >
-            <span className="rounded-lg border-2 border-destructive px-4 py-2 text-xl font-bold text-destructive rotate-12">
+            <span className="rounded-lg border-2 border-destructive px-3 py-1.5 text-base sm:text-xl font-bold text-destructive rotate-12">
               DISAGREE
             </span>
           </motion.div>
@@ -105,7 +105,7 @@ export default function SwipeCard({
             className="absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-success/20"
             style={{ opacity: rightOpacity }}
           >
-            <span className="rounded-lg border-2 border-success px-4 py-2 text-xl font-bold text-success -rotate-12">
+            <span className="rounded-lg border-2 border-success px-3 py-1.5 text-base sm:text-xl font-bold text-success -rotate-12">
               AGREE
             </span>
           </motion.div>
@@ -113,7 +113,7 @@ export default function SwipeCard({
             className="absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-primary/20"
             style={{ opacity: upOpacity }}
           >
-            <span className="rounded-lg border-2 border-primary px-4 py-2 text-xl font-bold text-primary">
+            <span className="rounded-lg border-2 border-primary px-3 py-1.5 text-base sm:text-xl font-bold text-primary">
               STRONGLY AGREE
             </span>
           </motion.div>
@@ -121,24 +121,24 @@ export default function SwipeCard({
             className="absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-destructive/20"
             style={{ opacity: downOpacity }}
           >
-            <span className="rounded-lg border-2 border-destructive px-4 py-2 text-xl font-bold text-destructive">
+            <span className="rounded-lg border-2 border-destructive px-3 py-1.5 text-base sm:text-xl font-bold text-destructive">
               STRONGLY DISAGREE
             </span>
           </motion.div>
 
-          <CardContent className="p-8">
-            <div className="flex items-center justify-between mb-6">
-              <Badge variant="outline" className="text-xs font-medium">{trait}</Badge>
-              <span className="text-xs text-muted-foreground font-mono">
+          <CardContent className="p-6 sm:p-8">
+            <div className="flex items-center justify-between mb-4 sm:mb-6">
+              <Badge variant="outline" className="text-[10px] sm:text-xs font-medium">{trait}</Badge>
+              <span className="text-[10px] sm:text-xs text-muted-foreground font-mono">
                 {questionNumber}/{totalQuestions}
               </span>
             </div>
 
-            <p className="font-display text-lg md:text-xl font-semibold leading-relaxed text-foreground min-h-[120px] flex items-center">
+            <p className="font-display text-base sm:text-lg md:text-xl font-semibold leading-relaxed text-foreground min-h-[100px] sm:min-h-[120px] flex items-center">
               {questionText}
             </p>
 
-            <div className="mt-8 flex items-center justify-center gap-2 text-xs text-muted-foreground">
+            <div className="mt-6 sm:mt-8 flex items-center justify-center gap-2 text-[10px] sm:text-xs text-muted-foreground">
               <Circle className="h-3 w-3" /> Tap for Neutral
             </div>
           </CardContent>
