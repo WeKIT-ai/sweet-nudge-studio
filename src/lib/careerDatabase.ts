@@ -175,15 +175,27 @@ export interface CareerMatch {
   career: Career;
   matchScore: number;
   matchingArchetypes: string[];
+  whyFits: string[]; // Explainability: human-readable reasons
 }
 
-/** Match user archetype profile to careers */
+// Archetype → strength description for explainability
+const ARCHETYPE_STRENGTHS: Record<string, string> = {
+  Builder: "hands-on problem-solving and technical skills",
+  Thinker: "analytical thinking and logical reasoning",
+  Advocate: "passion for social impact and ethical values",
+  Caregiver: "empathy, emotional intelligence, and people-first mindset",
+  Creator: "creativity, imagination, and innovative thinking",
+  Organizer: "structured planning, discipline, and goal orientation",
+  Leader: "natural leadership, communication, and initiative",
+  Adventurer: "adaptability, risk-taking, and entrepreneurial spirit",
+};
+
+/** Match user archetype profile to careers with explainability */
 export function matchCareers(
   archetypeScores: Record<Archetype, number>,
   careers: Career[],
   limit = 20
 ): CareerMatch[] {
-  // Get top 3 archetypes
   const sorted = Object.entries(archetypeScores)
     .sort(([, a], [, b]) => b - a);
   const top3 = sorted.slice(0, 3).map(([a]) => a);
@@ -191,22 +203,42 @@ export function matchCareers(
   const matches: CareerMatch[] = careers.map((career) => {
     let score = 0;
     const matching: string[] = [];
+    const whyFits: string[] = [];
 
     for (const [arch, careerWeight] of Object.entries(career.dnaScores)) {
       const userScore = archetypeScores[arch as Archetype] || 0;
-      // Weighted match: career weight × user archetype strength
       score += (userScore / 100) * careerWeight * 20;
       if (top3.includes(arch) && careerWeight >= 2) {
         matching.push(arch);
+        whyFits.push(
+          `Your ${ARCHETYPE_STRENGTHS[arch] || arch.toLowerCase()} aligns strongly with this role's ${arch} requirements.`
+        );
       }
     }
 
-    // Bonus for primary DNA match
     if (top3.includes(career.dnaPrimary)) {
       score += 15;
+      if (!matching.includes(career.dnaPrimary)) {
+        whyFits.push(
+          `This career's primary DNA is ${career.dnaPrimary} — one of your top archetypes.`
+        );
+      }
     }
 
-    return { career, matchScore: Math.min(Math.round(score), 100), matchingArchetypes: matching };
+    // Add contextual reasons
+    if (career.growthRate >= 20) {
+      whyFits.push(`High-growth field at ${career.growthRate}% — strong future demand.`);
+    }
+    if (career.jobSatisfaction >= 8 || career.jobSatisfaction >= 75) {
+      whyFits.push("High job satisfaction reported by professionals in this role.");
+    }
+
+    return {
+      career,
+      matchScore: Math.min(Math.round(score), 100),
+      matchingArchetypes: matching,
+      whyFits: whyFits.slice(0, 4),
+    };
   });
 
   return matches
