@@ -36,7 +36,7 @@ export default function AssessmentAgeSelect({
             </div>
             <h2 className="font-display text-xl font-bold text-foreground">WeKIT™ Career Clarity 360</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              Questions are tailored to your age for the best experience.
+              Select your age group — questions are tailored for the best experience.
             </p>
             <div className="mt-6 space-y-3">
               {AGE_OPTIONS.map((opt) => (
