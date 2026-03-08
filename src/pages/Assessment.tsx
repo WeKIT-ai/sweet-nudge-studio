@@ -2,13 +2,14 @@ import { useState, useEffect, useCallback } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Brain, Clock, ChevronLeft, ChevronRight, Undo2 } from "lucide-react";
+import { Clock, Undo2 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { type AgeGroup, weekitQuestions, LIKERT_OPTIONS } from "@/data/weekitQuestions";
 import AgeSelect from "@/components/assessment/AgeSelect";
 import AssessmentInstructions from "@/components/assessment/AssessmentInstructions";
 import AssessmentComplete from "@/components/assessment/AssessmentComplete";
 import SwipeCard from "@/components/assessment/SwipeCard";
+import WeKitLogo from "@/components/WeKitLogo";
 
 type Phase = "age-select" | "instructions" | "testing" | "completed";
 
