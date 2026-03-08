@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  Brain,
   ArrowRight,
   CheckCircle2,
   Star,
@@ -17,7 +16,9 @@ import {
   Target,
   Heart,
   Compass,
+  Brain,
 } from "lucide-react";
+import WeKitLogo from "@/components/WeKitLogo";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -83,9 +84,7 @@ const Index = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
         <div className="container mx-auto flex h-16 items-center justify-between px-6">
           <Link to="/" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-              <Brain className="h-5 w-5 text-primary-foreground" />
-            </div>
+            <WeKitLogo size="md" />
             <span className="font-display text-xl font-bold text-foreground">WeKIT™</span>
           </Link>
           <div className="hidden items-center gap-8 md:flex">
@@ -316,9 +315,7 @@ const Index = () => {
       <footer className="border-t border-border py-12">
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-6 md:flex-row">
           <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary">
-              <Brain className="h-4 w-4 text-primary-foreground" />
-            </div>
+            <WeKitLogo size="sm" />
             <span className="font-display text-sm font-bold text-foreground">WeKIT™ Career Clarity 360</span>
           </div>
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
