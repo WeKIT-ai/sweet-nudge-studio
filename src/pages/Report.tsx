@@ -484,8 +484,13 @@ const Report = () => {
 };
 
 function CareerCard({ match, formatSalary }: { match: CareerMatch; formatSalary: (n: number) => string }) {
+  const [expanded, setExpanded] = useState(false);
+
   return (
-    <div className="rounded-xl border border-border/50 bg-card p-4 hover-lift transition-all">
+    <div
+      className="rounded-xl border border-border/50 bg-card p-4 hover-lift transition-all cursor-pointer"
+      onClick={() => setExpanded(!expanded)}
+    >
       <div className="flex items-start justify-between mb-2">
         <h4 className="font-display text-sm font-semibold text-foreground leading-tight">
           {match.career.title}
@@ -523,6 +528,24 @@ function CareerCard({ match, formatSalary }: { match: CareerMatch; formatSalary:
             </span>
           ))}
         </div>
+      )}
+
+      {/* Explainability: Why this fits you */}
+      {expanded && match.whyFits.length > 0 && (
+        <div className="mt-3 pt-3 border-t border-border/30 space-y-1.5">
+          <p className="text-xs font-semibold text-primary">Why this fits you:</p>
+          {match.whyFits.map((reason, i) => (
+            <p key={i} className="text-xs text-muted-foreground flex items-start gap-1.5">
+              <CheckCircle2 className="h-3 w-3 mt-0.5 shrink-0 text-accent" />
+              {reason}
+            </p>
+          ))}
+        </div>
+      )}
+      {match.whyFits.length > 0 && (
+        <p className="mt-2 text-[10px] text-muted-foreground/60 text-center">
+          {expanded ? "Tap to collapse" : "Tap to see why →"}
+        </p>
       )}
     </div>
   );
