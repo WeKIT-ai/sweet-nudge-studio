@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import Assessment from "./pages/Assessment";
 import Report from "./pages/Report";
+import Offer from "./pages/Offer";
 import Docs from "./pages/Docs";
 import NotFound from "./pages/NotFound";
 
