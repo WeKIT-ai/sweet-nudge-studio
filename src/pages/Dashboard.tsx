@@ -22,6 +22,7 @@ import {
   XCircle,
   Eye,
 } from "lucide-react";
+import WeKitLogo from "@/components/WeKitLogo";
 import { assessments, candidates, dashboardStats, type Assessment, type Candidate } from "@/data/mockData";
 import {
   Dialog,
