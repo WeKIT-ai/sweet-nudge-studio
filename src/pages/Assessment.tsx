@@ -92,9 +92,7 @@ const Assessment = () => {
       <header className="sticky top-0 z-50 border-b border-border/50 bg-background/95 backdrop-blur">
         <div className="container mx-auto flex items-center justify-between px-6 py-3">
           <div className="flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <Brain className="h-4 w-4 text-primary-foreground" />
-            </div>
+            <WeKitLogo size="sm" />
             <span className="font-display font-semibold text-foreground text-sm">
               WeKIT™ Career Clarity 360
             </span>
