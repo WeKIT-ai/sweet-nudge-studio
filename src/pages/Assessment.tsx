@@ -80,7 +80,7 @@ const Assessment = () => {
   }
 
   if (phase === "completed") {
-    return <AssessmentComplete answeredCount={answeredCount} totalQ={totalQ} />;
+    return <AssessmentComplete answeredCount={answeredCount} totalQ={totalQ} answers={answers} />;
   }
 
   const question = weekitQuestions[currentQ];
