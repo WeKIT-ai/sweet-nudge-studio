@@ -65,10 +65,8 @@ const Report = () => {
         <div className="container mx-auto flex h-16 items-center justify-between px-6">
           <div className="flex items-center gap-3">
             <Link to="/dashboard" className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <Brain className="h-4 w-4 text-primary-foreground" />
-              </div>
-              <span className="font-display text-lg font-bold text-foreground">PsychMetric</span>
+              <WeKitLogo size="sm" />
+              <span className="font-display text-lg font-bold text-foreground">WeKIT™</span>
             </Link>
           </div>
           <div className="flex items-center gap-3">
