@@ -14,6 +14,7 @@ import {
   CheckCircle2,
   AlertCircle,
 } from "lucide-react";
+import WeKitLogo from "@/components/WeKitLogo";
 import { candidateReport } from "@/data/mockData";
 import {
   RadarChart,
