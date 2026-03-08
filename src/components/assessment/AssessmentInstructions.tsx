@@ -23,7 +23,7 @@ export default function AssessmentInstructions({ totalQ, onStart }: Props) {
               </div>
               <div>
                 <h1 className="font-display text-2xl font-bold text-foreground">
-                  We‑KIT Career Clarity 360
+                  WeKIT™ Career Clarity 360
                 </h1>
                 <p className="text-sm text-muted-foreground">
                   Personality-Based Career Assessment

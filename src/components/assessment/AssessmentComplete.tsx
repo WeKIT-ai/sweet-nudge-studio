@@ -23,11 +23,11 @@ export default function AssessmentComplete({ answeredCount, totalQ }: Props) {
               <CheckCircle2 className="h-8 w-8 text-accent" />
             </div>
             <h1 className="mt-6 font-display text-3xl font-bold text-foreground">
-              Assessment Complete!
+              Assessment Complete! 🎉
             </h1>
             <p className="mt-3 text-muted-foreground">
               You answered {answeredCount} of {totalQ} questions.
-              Your Career Clarity 360 report is being generated.
+              Your WeKIT™ Career Clarity 360 report is being generated.
             </p>
             <div className="mt-6 rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground">
               Your personalized career matches are ready — view your report now!

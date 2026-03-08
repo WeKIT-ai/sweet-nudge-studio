@@ -1,19 +1,22 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Brain,
-  BarChart3,
-  Shield,
-  Users,
-  Zap,
-  Globe,
   ArrowRight,
   CheckCircle2,
   Star,
-  ChevronRight,
+  Shield,
+  Users,
+  Sparkles,
+  Target,
+  Heart,
+  Compass,
 } from "lucide-react";
 
 const fadeUp = {
@@ -25,65 +28,55 @@ const fadeUp = {
   }),
 };
 
+const stats = [
+  { value: "97%", label: "Accuracy" },
+  { value: "3,300+", label: "Careers" },
+  { value: "10K+", label: "Students" },
+  { value: "50+", label: "Experts" },
+];
+
 const features = [
   {
-    icon: Brain,
-    title: "Adaptive Testing Engine",
-    description: "Real-time difficulty adjustment powered by Item Response Theory for precise, efficient measurement.",
+    icon: Compass,
+    title: "Career DNA Mapping",
+    description: "Discover your unique Career DNA archetype from our 6 personality archetypes matched to 3,300+ career paths.",
   },
   {
-    icon: BarChart3,
-    title: "Deep Analytics",
-    description: "Competency breakdowns, radar charts, and role-fit indicators backed by psychometric science.",
+    icon: Brain,
+    title: "AI-Powered Matching",
+    description: "Advanced psychometric scoring maps your 12 personality traits to careers that truly fit who you are.",
+  },
+  {
+    icon: Target,
+    title: "Personalized Roadmap",
+    description: "Get a step-by-step action plan with college recommendations, skill gaps, and next steps.",
+  },
+  {
+    icon: Heart,
+    title: "1-on-1 Mentor Call",
+    description: "Discuss your results with certified career mentors who help you chart your path forward.",
   },
   {
     icon: Shield,
-    title: "AI Proctoring",
-    description: "Tab-switch detection, anomaly algorithms, and identity verification ensure test integrity.",
+    title: "Scientifically Validated",
+    description: "46 research-backed questions developed with psychometric experts and validated across 10,000+ students.",
   },
   {
-    icon: Users,
-    title: "Candidate Experience",
-    description: "Mobile-first, accessible design with progress tracking and instant feedback.",
+    icon: Sparkles,
+    title: "Swipe-Based Experience",
+    description: "Fun, Tinder-style swipe interface — complete your assessment in just 12 minutes.",
   },
-  {
-    icon: Zap,
-    title: "Smart Insights",
-    description: "Predictive performance modeling and bias-free evaluations for better hiring decisions.",
-  },
-  {
-    icon: Globe,
-    title: "Enterprise Scale",
-    description: "10,000+ concurrent users, multi-language support, and ATS integrations.",
-  },
-];
-
-const assessmentTypes = [
-  {
-    title: "Cognitive Ability",
-    tests: ["Numerical Reasoning", "Verbal Reasoning", "Logical Reasoning", "Problem Solving"],
-    color: "bg-primary/10 text-primary",
-  },
-  {
-    title: "Personality",
-    tests: ["Big Five (OCEAN)", "DISC Profile", "MBTI-Style Typing", "Trait Competency"],
-    color: "bg-accent/10 text-accent",
-  },
-  {
-    title: "Situational Judgment",
-    tests: ["Leadership Scenarios", "Customer Service", "Ethical Judgment", "Decision Making"],
-    color: "bg-warning/10 text-warning",
-  },
-];
-
-const stats = [
-  { value: "40%", label: "Faster Hiring" },
-  { value: "30%", label: "Better Quality-of-Hire" },
-  { value: "95%", label: "User Satisfaction" },
-  { value: "85%+", label: "Prediction Accuracy" },
 ];
 
 const Index = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    whatsapp: "",
+    city: "",
+    stage: "",
+  });
+
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
@@ -93,19 +86,16 @@ const Index = () => {
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
               <Brain className="h-5 w-5 text-primary-foreground" />
             </div>
-            <span className="font-display text-xl font-bold text-foreground">PsychMetric</span>
+            <span className="font-display text-xl font-bold text-foreground">WeKIT™</span>
           </Link>
           <div className="hidden items-center gap-8 md:flex">
-            <a href="#features" className="text-sm font-medium text-muted-foreground transition hover:text-foreground">Features</a>
-            <a href="#assessments" className="text-sm font-medium text-muted-foreground transition hover:text-foreground">Assessments</a>
+            <a href="#features" className="text-sm font-medium text-muted-foreground transition hover:text-foreground">How It Works</a>
             <a href="#pricing" className="text-sm font-medium text-muted-foreground transition hover:text-foreground">Pricing</a>
+            <a href="https://www.wekitmentoring.com/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground transition hover:text-foreground">WeKIT Mentoring</a>
           </div>
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm" asChild>
-              <Link to="/dashboard">Login</Link>
-            </Button>
             <Button size="sm" asChild>
-              <Link to="/dashboard">Get Started <ArrowRight className="ml-1 h-4 w-4" /></Link>
+              <Link to="/assessment">Take the Test <ArrowRight className="ml-1 h-4 w-4" /></Link>
             </Button>
           </div>
         </div>
@@ -117,35 +107,34 @@ const Index = () => {
         <div className="container relative mx-auto px-6 text-center">
           <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={0}>
             <Badge variant="secondary" className="mb-6 rounded-full px-4 py-1.5 text-sm font-medium">
-              <Star className="mr-1.5 h-3.5 w-3.5 text-warning" /> Trusted by 500+ Organizations
+              <Star className="mr-1.5 h-3.5 w-3.5 text-warning" /> ONLY 150 FOUNDING COHORT SPOTS AVAILABLE
             </Badge>
           </motion.div>
           <motion.h1
             className="mx-auto max-w-4xl font-display text-5xl font-bold leading-tight tracking-tight text-foreground md:text-7xl"
             initial="hidden" animate="visible" variants={fadeUp} custom={1}
           >
-            Hire Smarter with{" "}
+            Fall in love with{" "}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Science-Backed
-            </span>{" "}
-            Assessments
+              your future
+            </span>
           </motion.h1>
           <motion.p
             className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl"
             initial="hidden" animate="visible" variants={fadeUp} custom={2}
           >
-            AI-powered psychometric testing platform that reduces bias, predicts performance,
-            and delivers actionable insights — from cognitive ability to personality profiling.
+            Discover careers that match your personality, not just your marks.
+            12 minutes → AI-powered career clarity → confident next steps.
           </motion.p>
           <motion.div
             className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
             initial="hidden" animate="visible" variants={fadeUp} custom={3}
           >
             <Button size="lg" className="h-12 px-8 text-base" asChild>
-              <Link to="/dashboard">Start Free Trial <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              <Link to="/assessment">Start Career Clarity 360 <ArrowRight className="ml-2 h-4 w-4" /></Link>
             </Button>
             <Button variant="outline" size="lg" className="h-12 px-8 text-base" asChild>
-              <Link to="/assessment">Try Demo Assessment</Link>
+              <a href="https://www.wekitmentoring.com/" target="_blank" rel="noopener noreferrer">Learn About WeKIT</a>
             </Button>
           </motion.div>
 
@@ -164,16 +153,52 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Features */}
-      <section id="features" className="py-24 bg-muted/30">
+      {/* How it works */}
+      <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-6">
           <div className="text-center">
-            <Badge variant="outline" className="mb-4">Platform Features</Badge>
+            <Badge variant="outline" className="mb-4">How It Works</Badge>
             <h2 className="font-display text-4xl font-bold text-foreground">
-              Everything You Need for Better Hiring
+              Career Clarity in 3 Steps
+            </h2>
+          </div>
+          <div className="mt-16 grid gap-8 md:grid-cols-3">
+            {[
+              { step: "01", title: "Swipe Through Questions", desc: "Answer 46 personality questions with our fun swipe interface. Left, right, up, down — it's that easy." },
+              { step: "02", title: "Get Your Career DNA", desc: "Our AI maps your 12 traits to 3,300+ careers and reveals your unique Career DNA archetype." },
+              { step: "03", title: "Receive Your Roadmap", desc: "Get a personalized PDF report with top career matches, a 1-on-1 mentor call, and action steps." },
+            ].map((item, i) => (
+              <motion.div
+                key={item.step}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                custom={i}
+              >
+                <Card className="h-full border-border/50 bg-card">
+                  <CardContent className="p-6">
+                    <span className="font-display text-4xl font-bold text-primary/20">{item.step}</span>
+                    <h3 className="mt-3 font-display text-lg font-semibold text-foreground">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section id="features" className="py-24">
+        <div className="container mx-auto px-6">
+          <div className="text-center">
+            <Badge variant="outline" className="mb-4">Features</Badge>
+            <h2 className="font-display text-4xl font-bold text-foreground">
+              Why WeKIT™ Career Clarity 360?
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-              A complete psychometric assessment suite from adaptive testing to advanced analytics.
+              A patent-pending assessment experience built for India's next generation.
             </p>
           </div>
           <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -201,98 +226,68 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Assessment Types */}
-      <section id="assessments" className="py-24">
-        <div className="container mx-auto px-6">
-          <div className="text-center">
-            <Badge variant="outline" className="mb-4">Assessment Library</Badge>
-            <h2 className="font-display text-4xl font-bold text-foreground">
-              Scientifically Validated Assessment Suite
-            </h2>
-          </div>
-          <div className="mt-16 grid gap-8 md:grid-cols-3">
-            {assessmentTypes.map((type, i) => (
-              <motion.div
-                key={type.title}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                custom={i}
-              >
-                <Card className="h-full border-border/50">
-                  <CardContent className="p-6">
-                    <Badge className={type.color + " border-0"}>{type.title}</Badge>
-                    <ul className="mt-6 space-y-3">
-                      {type.tests.map((test) => (
-                        <li key={test} className="flex items-center gap-2 text-sm text-foreground">
-                          <CheckCircle2 className="h-4 w-4 shrink-0 text-accent" />
-                          {test}
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Pricing */}
       <section id="pricing" className="py-24 bg-muted/30">
         <div className="container mx-auto px-6">
           <div className="text-center">
             <Badge variant="outline" className="mb-4">Pricing</Badge>
-            <h2 className="font-display text-4xl font-bold text-foreground">Simple, Transparent Pricing</h2>
+            <h2 className="font-display text-4xl font-bold text-foreground">Choose Your Path</h2>
+            <p className="mt-3 text-muted-foreground">Both paths lead to the same transformative career clarity experience.</p>
           </div>
-          <div className="mx-auto mt-16 grid max-w-5xl gap-8 md:grid-cols-3">
-            {[
-              { name: "Starter", price: "$49", period: "/mo", desc: "For small teams", features: ["Up to 50 assessments/mo", "3 assessment types", "Basic reports", "Email support"] },
-              { name: "Professional", price: "$149", period: "/mo", desc: "For growing teams", features: ["Unlimited assessments", "All assessment types", "Advanced analytics", "AI proctoring", "ATS integrations", "Priority support"], popular: true },
-              { name: "Enterprise", price: "Custom", period: "", desc: "For large organizations", features: ["Everything in Pro", "Custom assessments", "SSO & RBAC", "Dedicated CSM", "SLA guarantee", "On-premise option"] },
-            ].map((plan, i) => (
-              <motion.div
-                key={plan.name}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                custom={i}
-              >
-                <Card className={`relative h-full ${plan.popular ? "border-primary shadow-lg shadow-primary/10" : "border-border/50"}`}>
-                  {plan.popular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <Badge className="bg-primary text-primary-foreground">Most Popular</Badge>
-                    </div>
-                  )}
-                  <CardContent className="p-6 pt-8">
-                    <h3 className="font-display text-xl font-semibold text-foreground">{plan.name}</h3>
-                    <p className="text-sm text-muted-foreground">{plan.desc}</p>
-                    <div className="mt-4">
-                      <span className="font-display text-4xl font-bold text-foreground">{plan.price}</span>
-                      <span className="text-muted-foreground">{plan.period}</span>
-                    </div>
-                    <ul className="mt-6 space-y-3">
-                      {plan.features.map((f) => (
-                        <li key={f} className="flex items-center gap-2 text-sm text-foreground">
-                          <CheckCircle2 className="h-4 w-4 text-accent" /> {f}
-                        </li>
-                      ))}
-                    </ul>
-                    <Button
-                      className="mt-6 w-full"
-                      variant={plan.popular ? "default" : "outline"}
-                      asChild
-                    >
-                      <Link to="/dashboard">
-                        Get Started <ChevronRight className="ml-1 h-4 w-4" />
-                      </Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+          <div className="mx-auto mt-16 grid max-w-4xl gap-8 md:grid-cols-2">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={0}>
+              <Card className="relative h-full border-primary shadow-lg shadow-primary/10">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <Badge className="bg-primary text-primary-foreground">Founding Cohort</Badge>
+                </div>
+                <CardContent className="p-8 pt-10">
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-display text-4xl font-bold text-foreground">₹1,050</span>
+                    <span className="text-lg text-muted-foreground line-through">₹1,500</span>
+                  </div>
+                  <Badge variant="secondary" className="mt-2">30% OFF — Limited Time</Badge>
+                  <ul className="mt-6 space-y-3">
+                    {["Complete Career Clarity 360 Assessment", "Personalized career roadmap", "1-on-1 mentor video call", "Exclusive WhatsApp community", "PDF report with top career matches"].map((f) => (
+                      <li key={f} className="flex items-center gap-2 text-sm text-foreground">
+                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0" /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button className="mt-8 w-full h-12 text-base" asChild>
+                    <Link to="/assessment">Reserve My Founding Seat <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                  </Button>
+                  <p className="mt-3 text-center text-xs text-muted-foreground flex items-center justify-center gap-1">
+                    <Users className="h-3 w-3" /> Only 150 spots available
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={1}>
+              <Card className="h-full border-border/50">
+                <CardContent className="p-8">
+                  <div className="flex items-center gap-2">
+                    <Heart className="h-5 w-5 text-primary" />
+                    <span className="font-display text-xl font-semibold text-foreground">Scholarship Path</span>
+                  </div>
+                  <p className="mt-2 text-2xl font-display font-bold text-foreground">25–100% off</p>
+                  <Badge variant="secondary" className="mt-2">Need-Based</Badge>
+                  <ul className="mt-6 space-y-3">
+                    {["Based on family income", "Same benefits as Founding Cohort", "Simple application process", "48-hour response time"].map((f) => (
+                      <li key={f} className="flex items-center gap-2 text-sm text-foreground">
+                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0" /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button variant="outline" className="mt-8 w-full h-12 text-base">
+                    Apply for Scholarship <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                  <p className="mt-3 text-center text-xs text-muted-foreground">
+                    🏆 NapoleonRobertsFoundation
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -300,16 +295,17 @@ const Index = () => {
       {/* CTA */}
       <section className="py-24">
         <div className="container mx-auto px-6">
-          <Card className="overflow-hidden border-0 bg-gradient-to-br from-primary to-primary/80">
+          <Card className="overflow-hidden border-0 bg-gradient-to-br from-primary to-accent">
             <CardContent className="flex flex-col items-center p-12 text-center">
               <h2 className="font-display text-3xl font-bold text-primary-foreground md:text-4xl">
-                Ready to Transform Your Hiring?
+                12 Minutes to Career Clarity
               </h2>
               <p className="mt-4 max-w-xl text-primary-foreground/80">
-                Join 500+ organizations using PsychMetric to make data-driven hiring decisions.
+                Join 10,000+ students who discovered careers that match who they really are.
+                Don't let marks decide your future.
               </p>
               <Button size="lg" variant="secondary" className="mt-8 h-12 px-8 text-base" asChild>
-                <Link to="/dashboard">Start Free Trial <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                <Link to="/assessment">Start Your Assessment <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
             </CardContent>
           </Card>
@@ -323,9 +319,14 @@ const Index = () => {
             <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary">
               <Brain className="h-4 w-4 text-primary-foreground" />
             </div>
-            <span className="font-display text-sm font-bold text-foreground">PsychMetric</span>
+            <span className="font-display text-sm font-bold text-foreground">WeKIT™ Career Clarity 360</span>
           </div>
-          <p className="text-sm text-muted-foreground">© 2026 PsychMetric. GDPR & CCPA Compliant.</p>
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <a href="https://www.wekitmentoring.com/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition">wekitmentoring.com</a>
+            <span>•</span>
+            <span>support@wekit.ai</span>
+          </div>
+          <p className="text-sm text-muted-foreground">© 2026 WeKIT™. Patent Pending.</p>
         </div>
       </footer>
     </div>
