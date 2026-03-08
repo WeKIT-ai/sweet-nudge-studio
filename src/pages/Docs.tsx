@@ -215,40 +215,32 @@ export default function DocsPage() {
   };
 
   const handleDownloadHTML = () => {
-    const htmlContent = \`<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>We‑KIT PRD v1.0</title>
-<style>
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 800px; margin: 0 auto; padding: 40px 20px; line-height: 1.7; color: #1a1a2e; }
-  h1 { font-size: 28px; border-bottom: 3px solid #00665B; padding-bottom: 12px; }
-  h2 { font-size: 22px; color: #00665B; margin-top: 40px; border-bottom: 1px solid #e0e0e0; padding-bottom: 8px; }
-  h3 { font-size: 18px; color: #333; }
-  code, pre { background: #f4f4f8; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
-  pre { padding: 16px; overflow-x: auto; border: 1px solid #e0e0e0; }
-  ul { padding-left: 20px; }
-  li { margin-bottom: 6px; }
-  strong { color: #00665B; }
-  hr { border: none; border-top: 1px solid #e0e0e0; margin: 30px 0; }
-  blockquote { border-left: 4px solid #00665B; padding-left: 16px; margin-left: 0; color: #555; }
-  @media print { body { max-width: 100%; padding: 20px; } }
-</style>
-</head>
-<body>
-\${PRD_CONTENT
-      .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-      .replace(/^- (.+)$/gm, '<li>$1</li>')
-      .replace(/\\\`\\\`\\\`[\\s\\S]*?\\\`\\\`\\\`/g, (m) => '<pre>' + m.replace(/\\\`\\\`\\\`\\w*/g, '').trim() + '</pre>')
-      .replace(/\\\*\\\*(.+?)\\\*\\\*/g, '<strong>$1</strong>')
-      .replace(/^---$/gm, '<hr>')
-      .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
-      .replace(/\\n\\n/g, '<br><br>')}
-</body>
-</html>\`;
+    const styles = [
+      "body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 800px; margin: 0 auto; padding: 40px 20px; line-height: 1.7; color: #1a1a2e; }",
+      "h1 { font-size: 28px; border-bottom: 3px solid #00665B; padding-bottom: 12px; }",
+      "h2 { font-size: 22px; color: #00665B; margin-top: 40px; border-bottom: 1px solid #e0e0e0; padding-bottom: 8px; }",
+      "h3 { font-size: 18px; color: #333; }",
+      "pre { background: #f4f4f8; padding: 16px; border-radius: 4px; font-size: 13px; overflow-x: auto; border: 1px solid #e0e0e0; }",
+      "ul { padding-left: 20px; }",
+      "li { margin-bottom: 6px; }",
+      "strong { color: #00665B; }",
+      "hr { border: none; border-top: 1px solid #e0e0e0; margin: 30px 0; }",
+      "blockquote { border-left: 4px solid #00665B; padding-left: 16px; margin-left: 0; color: #555; }",
+    ].join("\n");
+
+    const body = PRD_CONTENT
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/^# (.+)$/gm, "<h1>$1</h1>")
+      .replace(/^## (.+)$/gm, "<h2>$1</h2>")
+      .replace(/^### (.+)$/gm, "<h3>$1</h3>")
+      .replace(/^- (.+)$/gm, "<li>$1</li>")
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/^---$/gm, "<hr>")
+      .replace(/\n\n/g, "<br><br>");
+
+    const htmlContent = "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><title>We-KIT PRD v1.0</title><style>" + styles + "</style></head><body>" + body + "</body></html>";
+
     const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
