@@ -9,6 +9,9 @@ import Assessment from "./pages/Assessment";
 import Report from "./pages/Report";
 import Offer from "./pages/Offer";
 import Docs from "./pages/Docs";
+import Payment from "./pages/Payment";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import AdminPayments from "./pages/AdminPayments";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +29,9 @@ const App = () => (
           <Route path="/report" element={<Report />} />
           <Route path="/offer" element={<Offer />} />
           <Route path="/docs" element={<Docs />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/payment-success" element={<PaymentSuccess />} />
+          <Route path="/admin/payments" element={<AdminPayments />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
