@@ -112,7 +112,7 @@ const Index = () => {
             <a href="https://www.wekitmentoring.com/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground transition-colors duration-300 hover:text-foreground">Mentoring</a>
           </div>
           <Button size="sm" className="rounded-full px-6 hover-glow" asChild>
-            <Link to="/assessment">Start Now <ArrowRight className="ml-1.5 h-4 w-4" /></Link>
+            <Link to="/payment">Start Now <ArrowRight className="ml-1.5 h-4 w-4" /></Link>
           </Button>
         </div>
       </motion.nav>
@@ -160,7 +160,7 @@ const Index = () => {
               transition={{ duration: 0.8, delay: 0.7 }}
             >
               <Button size="lg" className="h-14 rounded-full px-10 text-base font-semibold hover-glow" asChild>
-                <Link to="/assessment">
+                <Link to="/payment">
                   Start Career Clarity 360 <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
@@ -322,7 +322,7 @@ const Index = () => {
                     translated into a career path they never considered — but that fits them perfectly.
                   </p>
                   <Button size="lg" className="mt-10 h-14 rounded-full px-10 text-base font-semibold hover-glow" asChild>
-                    <Link to="/assessment">
+                    <Link to="/payment">
                       Discover Your Career DNA <ArrowRight className="ml-2 h-5 w-5" />
                     </Link>
                   </Button>
@@ -374,7 +374,7 @@ const Index = () => {
                   ))}
                 </ul>
                 <Button className="mt-8 w-full h-14 rounded-full text-base font-semibold hover-glow" asChild>
-                  <Link to="/assessment">Reserve My Founding Seat <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                  <Link to="/payment">Reserve My Founding Seat <ArrowRight className="ml-2 h-4 w-4" /></Link>
                 </Button>
                 <p className="mt-4 text-center text-xs text-muted-foreground flex items-center justify-center gap-1.5">
                   <Users className="h-3.5 w-3.5" /> Only 150 spots available
@@ -437,7 +437,7 @@ const Index = () => {
                 </p>
                 <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                   <Button size="lg" className="h-14 rounded-full px-10 text-base font-semibold hover-glow" asChild>
-                    <Link to="/assessment">
+                    <Link to="/payment">
                       Start Your Assessment <ArrowRight className="ml-2 h-5 w-5" />
                     </Link>
                   </Button>
