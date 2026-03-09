@@ -374,7 +374,7 @@ const Index = () => {
                   ))}
                 </ul>
                 <Button className="mt-8 w-full h-14 rounded-full text-base font-semibold hover-glow" asChild>
-                  <Link to="/assessment">Reserve My Founding Seat <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                  <Link to="/payment">Reserve My Founding Seat <ArrowRight className="ml-2 h-4 w-4" /></Link>
                 </Button>
                 <p className="mt-4 text-center text-xs text-muted-foreground flex items-center justify-center gap-1.5">
                   <Users className="h-3.5 w-3.5" /> Only 150 spots available
