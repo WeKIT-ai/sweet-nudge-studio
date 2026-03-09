@@ -112,7 +112,7 @@ const Index = () => {
             <a href="https://www.wekitmentoring.com/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground transition-colors duration-300 hover:text-foreground">Mentoring</a>
           </div>
           <Button size="sm" className="rounded-full px-6 hover-glow" asChild>
-            <Link to="/assessment">Start Now <ArrowRight className="ml-1.5 h-4 w-4" /></Link>
+            <Link to="/payment">Start Now <ArrowRight className="ml-1.5 h-4 w-4" /></Link>
           </Button>
         </div>
       </motion.nav>
