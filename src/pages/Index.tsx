@@ -160,7 +160,7 @@ const Index = () => {
               transition={{ duration: 0.8, delay: 0.7 }}
             >
               <Button size="lg" className="h-14 rounded-full px-10 text-base font-semibold hover-glow" asChild>
-                <Link to="/assessment">
+                <Link to="/payment">
                   Start Career Clarity 360 <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
