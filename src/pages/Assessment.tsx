@@ -20,6 +20,15 @@ const Assessment = () => {
   const navigate = useNavigate();
   const [phase, setPhase] = useState<Phase>("payment-gate");
   const [checkingPayment, setCheckingPayment] = useState(true);
+  const [ageGroup, setAgeGroup] = useState<AgeGroup>("18+");
+  const [currentQ, setCurrentQ] = useState(0);
+  const [answers, setAnswers] = useState<Record<number, number>>({});
+  const [timeLeft, setTimeLeft] = useState(12 * 60);
+  const [history, setHistory] = useState<number[]>([]);
+
+  const totalQ = weekitQuestions.length;
+  const answeredCount = Object.keys(answers).length;
+  const progressPct = (answeredCount / totalQ) * 100;
 
   // Check payment status on mount
   useEffect(() => {
@@ -44,6 +53,50 @@ const Assessment = () => {
     };
     checkPayment();
   }, []);
+
+  useEffect(() => {
+    if (phase !== "testing") return;
+    const timer = setInterval(() => {
+      setTimeLeft((t) => {
+        if (t <= 1) { setPhase("completed"); return 0; }
+        return t - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [phase]);
+
+  const formatTime = (s: number) => {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}:${sec.toString().padStart(2, "0")}`;
+  };
+
+  const handleSwipeAnswer = useCallback((optionIndex: number) => {
+    const qId = weekitQuestions[currentQ].id;
+    setAnswers((prev) => ({ ...prev, [qId]: optionIndex }));
+    setHistory((prev) => [...prev, currentQ]);
+
+    setTimeout(() => {
+      if (currentQ < totalQ - 1) {
+        setCurrentQ((c) => c + 1);
+      } else {
+        setPhase("completed");
+      }
+    }, 300);
+  }, [currentQ, totalQ]);
+
+  const handleUndo = useCallback(() => {
+    if (history.length === 0) return;
+    const prevQ = history[history.length - 1];
+    setHistory((h) => h.slice(0, -1));
+    const prevId = weekitQuestions[prevQ].id;
+    setAnswers((prev) => {
+      const next = { ...prev };
+      delete next[prevId];
+      return next;
+    });
+    setCurrentQ(prevQ);
+  }, [history]);
 
   if (checkingPayment) {
     return (
@@ -91,61 +144,6 @@ const Assessment = () => {
       </div>
     );
   }
-  const [ageGroup, setAgeGroup] = useState<AgeGroup>("18+");
-  const [currentQ, setCurrentQ] = useState(0);
-  const [answers, setAnswers] = useState<Record<number, number>>({});
-  const [timeLeft, setTimeLeft] = useState(12 * 60);
-  const [history, setHistory] = useState<number[]>([]);
-
-  const totalQ = weekitQuestions.length;
-  const answeredCount = Object.keys(answers).length;
-  const progressPct = (answeredCount / totalQ) * 100;
-
-  useEffect(() => {
-    if (phase !== "testing") return;
-    const timer = setInterval(() => {
-      setTimeLeft((t) => {
-        if (t <= 1) { setPhase("completed"); return 0; }
-        return t - 1;
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [phase]);
-
-  const formatTime = (s: number) => {
-    const m = Math.floor(s / 60);
-    const sec = s % 60;
-    return `${m}:${sec.toString().padStart(2, "0")}`;
-  };
-
-  const handleSwipeAnswer = useCallback((optionIndex: number) => {
-    const qId = weekitQuestions[currentQ].id;
-    setAnswers((prev) => ({ ...prev, [qId]: optionIndex }));
-    setHistory((prev) => [...prev, currentQ]);
-
-    // Auto-advance
-    setTimeout(() => {
-      if (currentQ < totalQ - 1) {
-        setCurrentQ((c) => c + 1);
-      } else {
-        setPhase("completed");
-      }
-    }, 300);
-  }, [currentQ, totalQ]);
-
-  const handleUndo = useCallback(() => {
-    if (history.length === 0) return;
-    const prevQ = history[history.length - 1];
-    setHistory((h) => h.slice(0, -1));
-    // Remove previous answer
-    const prevId = weekitQuestions[prevQ].id;
-    setAnswers((prev) => {
-      const next = { ...prev };
-      delete next[prevId];
-      return next;
-    });
-    setCurrentQ(prevQ);
-  }, [history]);
 
   if (phase === "age-select") {
     return <AgeSelect onSelect={(age) => { setAgeGroup(age); setPhase("instructions"); }} />;
@@ -164,7 +162,6 @@ const Assessment = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Header — compact for mobile */}
       <header className="sticky top-0 z-50 border-b border-border/50 bg-background/95 backdrop-blur">
         <div className="flex items-center justify-between px-4 py-2.5">
           <div className="flex items-center gap-2">
@@ -183,7 +180,6 @@ const Assessment = () => {
         <Progress value={progressPct} className="h-1 rounded-none" />
       </header>
 
-      {/* Swipe area — fills viewport */}
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-6 sm:py-12">
         <AnimatePresence mode="wait">
           <motion.div
@@ -204,7 +200,6 @@ const Assessment = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Controls — mobile-friendly large touch targets */}
         <div className="mt-6 sm:mt-12 w-full max-w-sm space-y-3">
           <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
             {LIKERT_OPTIONS.map((opt, i) => (
