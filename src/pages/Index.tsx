@@ -322,7 +322,7 @@ const Index = () => {
                     translated into a career path they never considered — but that fits them perfectly.
                   </p>
                   <Button size="lg" className="mt-10 h-14 rounded-full px-10 text-base font-semibold hover-glow" asChild>
-                    <Link to="/assessment">
+                    <Link to="/payment">
                       Discover Your Career DNA <ArrowRight className="ml-2 h-5 w-5" />
                     </Link>
                   </Button>
