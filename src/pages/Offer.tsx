@@ -63,7 +63,7 @@ export default function Offer() {
 
   const handleScholarship = () => {
     window.open(
-      "https://forms.zoho.com/wekit/scholarship",
+      "https://forms.zohopublic.in/wekitmentoring/form/clarityprofile/formperma/nBRJXcyzXbm8e45dasuve_TQN4mM-SIGnGTeJNZj3M8",
       "_blank",
       "noopener"
     );
