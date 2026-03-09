@@ -437,7 +437,7 @@ const Index = () => {
                 </p>
                 <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                   <Button size="lg" className="h-14 rounded-full px-10 text-base font-semibold hover-glow" asChild>
-                    <Link to="/assessment">
+                    <Link to="/payment">
                       Start Your Assessment <ArrowRight className="ml-2 h-5 w-5" />
                     </Link>
                   </Button>
