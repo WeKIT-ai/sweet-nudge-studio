@@ -65,7 +65,7 @@ const features = [
   {
     icon: Sparkles,
     title: "Swipe-Based Experience",
-    description: "Fun, intuitive Tinder-style interface — complete your entire assessment in just 12 minutes.",
+    description: "Fun, intuitive swipe-based interface — complete your entire assessment in just 12 minutes.",
     image: "https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=800",
   },
 ];
