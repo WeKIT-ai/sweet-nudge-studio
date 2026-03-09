@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Clock, Undo2 } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Clock, Undo2, Lock, Sparkles } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { type AgeGroup, weekitQuestions, LIKERT_OPTIONS } from "@/data/weekitQuestions";
 import AgeSelect from "@/components/assessment/AgeSelect";
@@ -10,11 +12,85 @@ import AssessmentInstructions from "@/components/assessment/AssessmentInstructio
 import AssessmentComplete from "@/components/assessment/AssessmentComplete";
 import SwipeCard from "@/components/assessment/SwipeCard";
 import WeKitLogo from "@/components/WeKitLogo";
+import { supabase } from "@/integrations/supabase/client";
 
-type Phase = "age-select" | "instructions" | "testing" | "completed";
+type Phase = "payment-gate" | "age-select" | "instructions" | "testing" | "completed";
 
 const Assessment = () => {
-  const [phase, setPhase] = useState<Phase>("age-select");
+  const navigate = useNavigate();
+  const [phase, setPhase] = useState<Phase>("payment-gate");
+  const [checkingPayment, setCheckingPayment] = useState(true);
+
+  // Check payment status on mount
+  useEffect(() => {
+    const checkPayment = async () => {
+      const email = localStorage.getItem("wekit_payment_email");
+      if (!email) {
+        setCheckingPayment(false);
+        return;
+      }
+
+      const { data } = await supabase
+        .from("payments")
+        .select("payment_status")
+        .eq("email", email)
+        .eq("payment_status", "success")
+        .limit(1);
+
+      if (data && data.length > 0) {
+        setPhase("age-select");
+      }
+      setCheckingPayment(false);
+    };
+    checkPayment();
+  }, []);
+
+  if (checkingPayment) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="animate-pulse text-muted-foreground">Verifying access...</div>
+      </div>
+    );
+  }
+
+  if (phase === "payment-gate") {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full max-w-md"
+        >
+          <Card className="border-border/50 bg-card/80 backdrop-blur text-center">
+            <CardContent className="pt-10 pb-8 px-6 space-y-6">
+              <div className="mx-auto w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+                <Lock className="h-8 w-8 text-primary" />
+              </div>
+              <div>
+                <h1 className="font-display text-xl sm:text-2xl font-bold text-foreground mb-2">
+                  Assessment Locked
+                </h1>
+                <p className="text-muted-foreground text-sm">
+                  You must purchase the WeKIT assessment to continue.
+                </p>
+              </div>
+              <Button
+                onClick={() => navigate("/payment")}
+                className="w-full h-12 text-base font-semibold"
+                size="lg"
+              >
+                <Sparkles className="h-5 w-5" />
+                Unlock Assessment — ₹1,500
+              </Button>
+              <div className="pt-4 border-t border-border/50">
+                <WeKitLogo size="sm" />
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </div>
+    );
+  }
   const [ageGroup, setAgeGroup] = useState<AgeGroup>("18+");
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
