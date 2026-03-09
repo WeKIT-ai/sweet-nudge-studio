@@ -14,7 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      payments: {
+        Row: {
+          age: string | null
+          city: string | null
+          created_at: string
+          email: string
+          final_price: number
+          id: string
+          list_price: number
+          payment_status: string
+          phone: string
+          razorpay_order_id: string | null
+          razorpay_payment_id: string | null
+          scholarship_code: string | null
+          school: string | null
+          updated_at: string
+          user_name: string
+        }
+        Insert: {
+          age?: string | null
+          city?: string | null
+          created_at?: string
+          email: string
+          final_price?: number
+          id?: string
+          list_price?: number
+          payment_status?: string
+          phone: string
+          razorpay_order_id?: string | null
+          razorpay_payment_id?: string | null
+          scholarship_code?: string | null
+          school?: string | null
+          updated_at?: string
+          user_name: string
+        }
+        Update: {
+          age?: string | null
+          city?: string | null
+          created_at?: string
+          email?: string
+          final_price?: number
+          id?: string
+          list_price?: number
+          payment_status?: string
+          phone?: string
+          razorpay_order_id?: string | null
+          razorpay_payment_id?: string | null
+          scholarship_code?: string | null
+          school?: string | null
+          updated_at?: string
+          user_name?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
