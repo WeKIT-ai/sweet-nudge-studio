@@ -55,7 +55,7 @@ export default function Offer() {
   const handleFoundingCohort = () => {
     // Razorpay integration placeholder
     window.open(
-      "https://razorpay.me/@wekit?amount=1050",
+      "https://pages.razorpay.com/pl_SOxzIHeC1gi1AD/view",
       "_blank",
       "noopener"
     );
