@@ -129,18 +129,21 @@ const Assessment = () => {
   const questionText = question.variants[ageGroup];
 
   return (
-    <AssessmentQuestions
-      currentQ={currentQ}
-      totalQ={totalQ}
-      answeredCount={answeredCount}
-      questionText={questionText}
-      questionId={question.id}
-      trait={question.trait}
-      answers={answers}
-      onAnswer={handleAnswer}
-      onUndo={handleUndo}
-      canUndo={history.length > 0}
-    />
+    <>
+      {seo}
+      <AssessmentQuestions
+        currentQ={currentQ}
+        totalQ={totalQ}
+        answeredCount={answeredCount}
+        questionText={questionText}
+        questionId={question.id}
+        trait={question.trait}
+        answers={answers}
+        onAnswer={handleAnswer}
+        onUndo={handleUndo}
+        canUndo={history.length > 0}
+      />
+    </>
   );
 };
 
