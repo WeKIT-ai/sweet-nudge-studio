@@ -5,6 +5,7 @@ import AssessmentHero from "@/components/assessment/AssessmentHero";
 import AssessmentAgeSelect from "@/components/assessment/AgeSelect";
 import AssessmentQuestions from "@/components/assessment/AssessmentQuestions";
 import AssessmentComplete from "@/components/assessment/AssessmentComplete";
+import SEO from "@/components/SEO";
 import { supabase } from "@/integrations/supabase/client";
 
 type Phase = "payment-gate" | "age-select" | "testing" | "completed";

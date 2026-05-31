@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Download, ArrowLeft, FileText } from "lucide-react";
 import WeKitLogo from "@/components/WeKitLogo";
 import ScrollReveal from "@/components/ScrollReveal";
+import SEO from "@/components/SEO";
 
 const PRD_CONTENT = `# We‑KIT – AI‑Powered Psychometric Career Discovery Platform
 ## Product Requirements Document v1.0 | February 2026
@@ -254,6 +255,11 @@ export default function DocsPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Product Documentation | WeKIT™"
+        description="Read the WeKIT Career Clarity 360 product requirements document and learn how the assessment platform works."
+        path="/docs"
+      />
       <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
         <div className="container mx-auto flex h-14 items-center justify-between px-4">
           <Link to="/" className="flex items-center gap-2">
