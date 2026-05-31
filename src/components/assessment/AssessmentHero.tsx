@@ -141,7 +141,7 @@ export default function AssessmentHero({ onStart, isLocked }: Props) {
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown className="h-6 w-6 text-muted-foreground/50" />
+          <ChevronDown className="h-6 w-6 text-muted-foreground" />
         </motion.div>
       </div>
     </div>
