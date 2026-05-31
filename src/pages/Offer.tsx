@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import WeKitLogo from "@/components/WeKitLogo";
+import SEO from "@/components/SEO";
 
 /* ── funnel steps ── */
 const FUNNEL_STEPS = [
@@ -71,6 +72,11 @@ export default function Offer() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Founding Cohort Offer | WeKIT™ Career Clarity 360"
+        description="Reserve your founding-cohort seat for the WeKIT Career Clarity 360 assessment at a limited launch price."
+        path="/offer"
+      />
       {/* ── header ── */}
       <header className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex h-14 max-w-lg items-center justify-between px-4">

@@ -5,6 +5,7 @@ import AssessmentHero from "@/components/assessment/AssessmentHero";
 import AssessmentAgeSelect from "@/components/assessment/AgeSelect";
 import AssessmentQuestions from "@/components/assessment/AssessmentQuestions";
 import AssessmentComplete from "@/components/assessment/AssessmentComplete";
+import SEO from "@/components/SEO";
 import { supabase } from "@/integrations/supabase/client";
 
 type Phase = "payment-gate" | "age-select" | "testing" | "completed";
@@ -70,57 +71,79 @@ const Assessment = () => {
     setCurrentQ(prevQ);
   }, [history]);
 
+  const seo = (
+    <SEO
+      title="Career Discovery Assessment | WeKIT™ Career Clarity 360"
+      description="A 12-minute guided psychometric assessment that decodes your career DNA across 46 personality dimensions."
+      path="/assessment"
+    />
+  );
+
   if (checkingPayment) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-10 h-10 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-          <p className="text-muted-foreground text-sm">Verifying access...</p>
+      <>
+        {seo}
+        <div className="min-h-screen bg-background flex items-center justify-center">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-10 h-10 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+            <p className="text-muted-foreground text-sm">Verifying access...</p>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
   if (phase === "payment-gate") {
     return (
-      <AssessmentHero
-        onStart={() => navigate("/payment")}
-        isLocked
-      />
+      <>
+        {seo}
+        <AssessmentHero onStart={() => navigate("/payment")} isLocked />
+      </>
     );
   }
 
   if (phase === "age-select") {
     return (
-      <AssessmentAgeSelect
-        onSelect={(age) => {
-          setAgeGroup(age);
-          setPhase("testing");
-        }}
-      />
+      <>
+        {seo}
+        <AssessmentAgeSelect
+          onSelect={(age) => {
+            setAgeGroup(age);
+            setPhase("testing");
+          }}
+        />
+      </>
     );
   }
 
   if (phase === "completed") {
-    return <AssessmentComplete answeredCount={answeredCount} totalQ={totalQ} answers={answers} />;
+    return (
+      <>
+        {seo}
+        <AssessmentComplete answeredCount={answeredCount} totalQ={totalQ} answers={answers} />
+      </>
+    );
   }
 
   const question = weekitQuestions[currentQ];
   const questionText = question.variants[ageGroup];
 
   return (
-    <AssessmentQuestions
-      currentQ={currentQ}
-      totalQ={totalQ}
-      answeredCount={answeredCount}
-      questionText={questionText}
-      questionId={question.id}
-      trait={question.trait}
-      answers={answers}
-      onAnswer={handleAnswer}
-      onUndo={handleUndo}
-      canUndo={history.length > 0}
-    />
+    <>
+      {seo}
+      <AssessmentQuestions
+        currentQ={currentQ}
+        totalQ={totalQ}
+        answeredCount={answeredCount}
+        questionText={questionText}
+        questionId={question.id}
+        trait={question.trait}
+        answers={answers}
+        onAnswer={handleAnswer}
+        onUndo={handleUndo}
+        canUndo={history.length > 0}
+      />
+    </>
   );
 };
 

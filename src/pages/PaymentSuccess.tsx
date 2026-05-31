@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
 import WeKitLogo from "@/components/WeKitLogo";
+import SEO from "@/components/SEO";
 
 const PaymentSuccess = () => {
   const navigate = useNavigate();
@@ -26,6 +27,11 @@ const PaymentSuccess = () => {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4">
+      <SEO
+        title="Payment Successful | WeKIT™ Career Clarity 360"
+        description="Your payment is confirmed. Get ready to begin your WeKIT Career Discovery Assessment."
+        path="/payment-success"
+      />
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
