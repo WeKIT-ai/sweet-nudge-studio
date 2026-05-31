@@ -18,6 +18,7 @@ import {
   Loader2,
 } from "lucide-react";
 import WeKitLogo from "@/components/WeKitLogo";
+import SEO from "@/components/SEO";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -170,6 +171,11 @@ const Payment = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Unlock Your Career Report — ₹1,500 | WeKIT™"
+        description="Complete the WeKIT AI Career Discovery Assessment and unlock your personalized career DNA report in 12 minutes."
+        path="/payment"
+      />
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-border/50 bg-background/95 backdrop-blur">
         <div className="flex items-center justify-between px-4 py-3 max-w-6xl mx-auto">
@@ -198,6 +204,7 @@ const Payment = () => {
           </p>
         </motion.div>
 
+        <h2 className="sr-only">Plan and checkout</h2>
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
           {/* What you get */}
           <motion.div

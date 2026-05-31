@@ -23,6 +23,7 @@ import {
   Eye,
 } from "lucide-react";
 import WeKitLogo from "@/components/WeKitLogo";
+import SEO from "@/components/SEO";
 import { assessments, candidates, dashboardStats, type Assessment, type Candidate } from "@/data/mockData";
 import {
   Dialog,
@@ -58,6 +59,11 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Recruitment Dashboard | WeKIT™"
+        description="Manage candidate assessments, track completion, and review scores from your WeKIT recruitment dashboard."
+        path="/dashboard"
+      />
       {/* Top bar */}
       <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
         <div className="container mx-auto flex h-16 items-center justify-between px-6">
@@ -77,6 +83,7 @@ const Dashboard = () => {
       </header>
 
       <main className="container mx-auto px-6 py-8">
+        <h1 className="font-display text-3xl font-bold text-foreground mb-6">Recruitment Dashboard</h1>
         {/* Stats */}
         <div className="grid gap-4 md:grid-cols-4">
           {[
@@ -166,7 +173,10 @@ const Dashboard = () => {
                         Invite Candidates
                       </Button>
                       <Button size="sm" variant="outline" asChild>
-                        <Link to="/assessment"><Eye className="h-4 w-4" /></Link>
+                        <Link to="/assessment" aria-label={`View ${assessment.title} assessment`}>
+                          <Eye className="h-4 w-4" />
+                          <span className="sr-only">View assessment</span>
+                        </Link>
                       </Button>
                     </div>
                   </CardContent>

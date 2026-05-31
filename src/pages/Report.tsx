@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import WeKitLogo from "@/components/WeKitLogo";
 import ScrollReveal from "@/components/ScrollReveal";
+import SEO from "@/components/SEO";
 import {
   loadCareers,
   traitScoresToArchetypes,
@@ -236,6 +237,11 @@ const Report = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Your Career Report | WeKIT™ Career Clarity 360"
+        description="Your personalized career DNA report with top archetype matches, superpowers, and a roadmap of next moves."
+        path="/report"
+      />
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
         <div className="container mx-auto flex h-16 items-center justify-between px-6">
@@ -272,6 +278,7 @@ const Report = () => {
         </ScrollReveal>
 
         {/* Career DNA Archetype */}
+        <h2 className="sr-only">Your career profile</h2>
         <ScrollReveal>
           <Card className="border-border/50 overflow-hidden">
             <div className="bg-gradient-to-r from-primary/10 via-accent/5 to-primary/10 p-1" />
