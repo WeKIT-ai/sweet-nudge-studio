@@ -20,6 +20,7 @@ import {
 import WeKitLogo from "@/components/WeKitLogo";
 import VideoHero from "@/components/VideoHero";
 import ScrollReveal from "@/components/ScrollReveal";
+import SEO from "@/components/SEO";
 
 const HERO_VIDEO = "https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4";
 const SECTION_VIDEO = "https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4";
@@ -95,6 +96,37 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="WeKIT™ Career Clarity 360 | AI-Powered Career Assessment"
+        description="Discover careers that match your personality in 12 minutes. AI-powered psychometric assessment mapped to 3,300+ career paths."
+        path="/"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "WeKIT",
+            url: "https://wekit.ai",
+            logo: "https://wekit.ai/placeholder.svg",
+            sameAs: ["https://www.wekitmentoring.com/"],
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "WeKIT",
+            url: "https://wekit.ai",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            name: "WeKIT Career Clarity 360",
+            description:
+              "AI-powered psychometric career discovery assessment for students, mapped to 3,300+ career paths.",
+            provider: { "@type": "Organization", name: "WeKIT" },
+            areaServed: "IN",
+            offers: { "@type": "Offer", price: "1050", priceCurrency: "INR" },
+          },
+        ]}
+      />
       {/* Floating Nav */}
       <motion.nav
         className="fixed top-0 left-0 right-0 z-50 glass-nav"
